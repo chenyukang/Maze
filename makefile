@@ -8,7 +8,7 @@ OBJS = $(patsubst %.cpp,%.o,$(SOURCES))
 	$(CC) $(CFLAGS) -c $< -o $@
 
 maze:$(OBJS)
-	$(CC) $(OBJS) -lglut -lglui  -o maze
+	$(CC) $(OBJS) libglui.a -lglut -lglui  -o maze
 
 clean: 
 	@/bin/rm *.o
