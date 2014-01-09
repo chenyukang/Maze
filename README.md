@@ -5,4 +5,4 @@ a maze generation using Union-set
 and also some path-find algorithms
 
 
-![snapshot]()
+![snapshot](https://github.com/chenyukang/Maze/blob/master/maze.jpg)
