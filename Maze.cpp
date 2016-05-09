@@ -3,7 +3,8 @@
 #include "DFS_R.h"
 #include "DFS_L.h"
 #include "A_star.h"
-#include <GL/glut.h>
+#include <GLUT/glut.h>
+//#include <GL/glut.h>
 #include <iostream>
 #include <assert.h>
 using namespace std;

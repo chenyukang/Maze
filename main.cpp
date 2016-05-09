@@ -1,7 +1,9 @@
+#include <GLUT/glut.h>
+#include <unistd.h>
 #include "Maze.h"
 #include "Algorithm.h"
 #include "DFS_R.h"
-#include <GL/glut.h>
+//#include <GL/glut.h>
 #include "glui.h"
 #include <iostream>
 #include <stdio.h>
