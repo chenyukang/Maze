@@ -6,7 +6,7 @@
 C_COMPILER = clang
 CC_COMPILER = clang++
 FLAGS = -g
-EXE_LINK_LIB = -framework OpenGL  -framework glut -framework glui
+EXE_LINK_LIB = -framework OpenGL -framework glut -framework glui
 
 rule C_RULE
  command = $C_COMPILER $FLAGS -MMD -MF $out.d -o $out -c $in
