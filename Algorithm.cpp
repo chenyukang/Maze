@@ -11,7 +11,6 @@ AlgorithmBase::AlgorithmBase(Maze* maze,int x,int y):m_pMaze(maze),personx(x),pe
     fromy=y;
 }
 
-
 void AlgorithmBase::MovePerson()
 {
 	search();

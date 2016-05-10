@@ -1,10 +1,12 @@
 #include "Maze.h"
 #include "Algorithm.h"
 #include "DFS_R.h"
-#include <GL/glut.h>
+//#include <GL/glut.h>
+#include <GLUT/glut.h>
 #include "glui.h"
 #include <iostream>
 #include <stdio.h>
+#include <unistd.h>
 using namespace std;
 
 int   main_window;
@@ -23,8 +25,8 @@ Maze* maze;
 
 void update()
 {
-    if ( glutGetWindow() != main_window ) 
-        glutSetWindow(main_window);  
+    if ( glutGetWindow() != main_window )
+        glutSetWindow(main_window);
 
     maze->Update();
     usleep(40000);
@@ -85,7 +87,7 @@ void keyboard(unsigned char key,int x,int y)
         maze->ChangeDrawVisited();
         break;
     case 'r':
-        maze->Reset();//reset 
+        maze->Reset();//reset
         break;
     }
     glutPostRedisplay();
@@ -97,11 +99,11 @@ void keyboard(unsigned char key,int x,int y)
 
 void myGlutIdle( void )
 {
-  /* According to the GLUT specification, the current window is 
+  /* According to the GLUT specification, the current window is
      undefined during an idle callback.  So we need to explicitly change
      it if necessary */
-  if ( glutGetWindow() != main_window ) 
-    glutSetWindow(main_window);  
+  if ( glutGetWindow() != main_window )
+    glutSetWindow(main_window);
 
   glutPostRedisplay();
 }
@@ -152,15 +154,15 @@ void A_star_func()
 int main(int argc,char* argv[])
 {
     maze=new Maze(60,78,0.9);
-   
+
     glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB |GLUT_DEPTH);
     glutInitWindowSize(900,600);
     glutInitWindowPosition(100,100);
-    
+
     main_window=glutCreateWindow ("Maze");
     init();
-    
+
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
@@ -168,9 +170,9 @@ int main(int argc,char* argv[])
     /****************************************/
     /*         Here's the GLUI code         */
     /****************************************/
-  
+
     /*** Create the side subwindow ***/
-    glui = GLUI_Master.create_glui_subwindow( main_window, 
+    glui = GLUI_Master.create_glui_subwindow( main_window,
                                               GLUI_SUBWINDOW_RIGHT );
 
     GLUI_Panel *maze_size = new GLUI_Panel(glui,"Maze Size");
@@ -179,17 +181,17 @@ int main(int argc,char* argv[])
     width_spinner->set_int_limits( 4, 100 );
     width_spinner->set_alignment( GLUI_ALIGN_RIGHT );
 
-    height_spinner = 
+    height_spinner =
         new GLUI_Spinner(maze_size, "Height:", &height);
     height_spinner->set_int_limits( 4, 100 );
     height_spinner->set_alignment( GLUI_ALIGN_RIGHT );
-    
-    percent_spinner = 
+
+    percent_spinner =
         new GLUI_Spinner(maze_size, "Percent:", &percent);
     percent_spinner->set_float_limits(0.1, 1.0);
     percent_spinner->set_alignment( GLUI_ALIGN_RIGHT );
 
-    
+
     new GLUI_Button(maze_size,"New Maze",0,(GLUI_Update_CB)new_maze);
 
     GLUI_Panel *type_panel = new GLUI_Panel(glui, "Algorithm_Type" );
@@ -198,14 +200,14 @@ int main(int argc,char* argv[])
     new GLUI_Button(type_panel,"Right first DFS",0,(GLUI_Update_CB)dfs_r_func);
     new GLUI_Button(type_panel,"Left first DFS",0,(GLUI_Update_CB)dfs_l_func);
     new GLUI_Button(type_panel,"A star",0,(GLUI_Update_CB)A_star_func);
-        
+
     new GLUI_Button(glui, "Reset",0,(GLUI_Update_CB)reset);
     new GLUI_Button(glui, "Quit", 0,(GLUI_Update_CB)exit );
 
 
     glui->set_main_gfx_window( main_window );
     GLUI_Master.set_glutIdleFunc( update );
-  
+
     glutMainLoop();
     return EXIT_SUCCESS;
 }

@@ -74,5 +74,5 @@ const vector<int>& A_star::GetPath()//return the path from source to target
         }
     }
     return m_path;
-    
 }
+

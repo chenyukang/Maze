@@ -11,7 +11,7 @@ DFS_L::DFS_L(Maze* maze,int x,int y):AlgorithmBase(maze,x,y)
     dir_now=0;
     cout<<"DFS_L constructed"<<endl;
 }
-
+    
 int DFS_L::Turn_AntiClock(int now)
 {
     int re=now-1;
