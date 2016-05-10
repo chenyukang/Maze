@@ -2,3 +2,4 @@
 *.exe
 *.o.d
 .ninja_deps
+*.a

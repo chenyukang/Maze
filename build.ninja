@@ -5,7 +5,7 @@
  # ========== COMPILER ============ #
 C_COMPILER = clang
 CC_COMPILER = clang++
-FLAGS = -g
+FLAGS = -g -Wno-deprecated-declarations
 EXE_LINK_LIB = -framework OpenGL -framework glut -framework glui
 
 rule C_RULE

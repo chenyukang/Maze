@@ -1,4 +1,3 @@
-#include "Algorithm.h"
 #include "Maze.h"
 #include <iostream>
 #include <iomanip>
@@ -11,10 +10,14 @@ AlgorithmBase::AlgorithmBase(Maze* maze,int x,int y):m_pMaze(maze),personx(x),pe
     fromy=y;
 }
 
+AlgorithmBase::~AlgorithmBase() {
+  delete m_pMaze;
+}
+
 void AlgorithmBase::MovePerson()
 {
-	search();
-	m_pMaze->SetPerson(personx,persony);
+  search();
+  m_pMaze->SetPerson(personx,persony);
 
 }
 
@@ -29,7 +32,7 @@ DFS::DFS(Maze* maze,int x,int y):AlgorithmBase(maze,x,y)
     Di[1][0]=0;Di[1][1]=-1;
     Di[2][0]=0;Di[2][1]=1;
     Di[3][0]=1;Di[3][1]=0;
-	m_stack.push(Node(x,y));
+  m_stack.push(Node(x,y));
     cout<<"DFS constructed"<<endl;
 }
 
@@ -51,11 +54,11 @@ bool DFS::search()
                 m_stack.push(node);
                 m_pathmap[m_pMaze->Getid(nx,ny)]=m_pMaze->Getid(step.x,step.y);
             }
-        }   
-            
+        }
+
         personx=step.x;
         persony=step.y;
-        
+
     }
     return false;
 }
@@ -117,7 +120,7 @@ bool BFS::search()
                 m_pMaze->SetCellVisited(nx,ny,true);
             }
         }
-        
+
         personx=step.x;
         persony=step.y;
     }
@@ -139,7 +142,7 @@ const vector<int>& BFS::GetPath()//return the path from source to target
         }
     }
     return m_path;
-    
+
 }
 
 void BFS::Draw()

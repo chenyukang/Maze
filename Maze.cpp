@@ -358,7 +358,7 @@ void Maze::SetAllCellUnVisited()
 void Maze::Reset()
 {
     delete m_pAlgorithm;
-    m_pAlgorithm=NULL;
+    m_pAlgorithm = NULL;
     personx=0;
     persony=0;
     finished=false;

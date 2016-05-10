@@ -20,7 +20,7 @@ public:
         int cell_id1;
         int cell_id2;
     }Door;
-    
+
 public:
     typedef Cell** World;
     Maze(int M,int N,float m_pe);
@@ -38,23 +38,23 @@ public:
     bool IsValid(int,int);
     bool IsValidNextPath(int,int,int,int);
     bool TestNeighbor(int id1,int id2);
-    
+
     int  Getid(int x,int y);
     void SetPerson(int x,int y) {personx=x; persony=y;}
     void SetCellVisited(int x,int y,bool visited);
     void Reset();
     void SetAllCellUnVisited();
-    
+
     int GetWidth()const {return N;}
     int GetHeight() const {return M;}
-    
+
     void ChangeMode();
     bool IsFinished() {return finished;}
     void ChangeDrawVisited() { draw_visited=(!draw_visited);}
-    
+
 private:
     Cell* GetFromID(int id);
-    
+
 private:
 
     Cell** world;
