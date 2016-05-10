@@ -28,7 +28,7 @@ void update()
         glutSetWindow(main_window);
 
     maze->Update();
-    usleep(40000);
+    usleep(10000);
     glutPostRedisplay();
 }
 
