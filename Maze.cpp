@@ -3,7 +3,8 @@
 #include "DFS_R.h"
 #include "DFS_L.h"
 #include "A_star.h"
-#include <GL/glut.h>
+//#include <GL/glut.h>
+#include <GLUT/glut.h>
 #include <iostream>
 #include <assert.h>
 using namespace std;
@@ -18,7 +19,7 @@ Maze::Maze(int m,int n,float per):M(m),N(n),personx(0),persony(0),m_per(per),m_b
     InitDoorId();
     InitPath();
     InitRoom();
-    
+
     Al_type=none;
 	m_pAlgorithm=NULL;
     finished=false;
@@ -40,7 +41,7 @@ void Maze::InitDoorId()
             for(int k=0;k<4;k++)
                 world[i][j].neighbor[k]=-1;
         }
-    
+
     index=0;
     int door_id=0;
     for(int i=0;i<M;i++)
@@ -52,11 +53,11 @@ void Maze::InitDoorId()
             Doors[door_id].cell_id1=index;
             Doors[door_id].cell_id2=(++index);
             door_id++;
-            
+
         }
         ++index;
     }
-  
+
     for(int i=0;i<M-1;i++)
         for(int j=0;j<N;j++)
         {
@@ -83,7 +84,7 @@ void Maze::InitPath()
         iter+=rand_door;
         int roota=Ds->find(iter->cell_id1);
         int rootb=Ds->find(iter->cell_id2);
-      
+
         if(roota!= rootb)
         {
             Ds->unionSets(roota,rootb);
@@ -115,7 +116,7 @@ void Maze::InitRoom()
         int id2=iter->cell_id2;
         Cell* Cell1=GetFromID(id1);
         Cell* Cell2=GetFromID(id2);
-       
+
         if(id1==(id2-1))
         {
             Cell1->neighbor[1]=-1;
@@ -130,7 +131,7 @@ void Maze::InitRoom()
     }
 }
 
-                
+
 
 void Maze::Draw()
 {
@@ -153,7 +154,7 @@ void Maze::Draw()
                 glVertex2f(i,j+1);
                 glVertex2f(i+1,j+1);
                 glEnd();
-                
+
             }
         }
     for(int i=0;i<M-1;i++)
@@ -167,6 +168,14 @@ void Maze::Draw()
                 glEnd();
             }
         }
+
+    glColor3f(1.0f,1.0f,1.0f);//draw the person
+    glPointSize(4);
+    glBegin(GL_POINTS);
+    glVertex2f(personx+0.5f,persony+0.5f);
+    glVertex2f(personx+0.5f,persony+0.5f);
+    glEnd();
+
     glColor3f(0.0f,0.0f,0.0f);
     glBegin(GL_LINES);
     glVertex2f(0,0);
@@ -175,14 +184,7 @@ void Maze::Draw()
     glVertex2f(M,N);
     glEnd();
 
-    glColor3f(1.0f,1.0f,0.0f);//draw the person
-    glPointSize(5);
-    glBegin(GL_POINT);
-    glVertex2f(personx+0.5f,persony+0.5f);
-    glEnd();
-
-    if(finished)
-    {
+    if(finished) {
         vector<int> path=m_pAlgorithm->GetPath();
         if(path.size()==0)
             return;
@@ -197,7 +199,6 @@ void Maze::Draw()
             yindex.push_back(y);
         }
 
-        glColor3f(0.0f,1.0f,0.5f);
         for(int i=0;i<xindex.size()-1;i++)
         {
             int x1=xindex[i];
@@ -205,14 +206,15 @@ void Maze::Draw()
             int x2=xindex[i+1];
             int y2=yindex[i+1];
 
-            glBegin(GL_LINE); 
+            glColor3f(1.0f,1.0f,1.0f);
+            glBegin(GL_LINE);
             glVertex2f(x1+0.5f,y1+0.5f);
             glVertex2f(x2+0.5f,y2+0.5f);
             glEnd();
         }
     }
 
-    if(draw_visited)
+    if(true)
     {
         glColor3f(1.0f,1.0f,1.0f);
         glPointSize(0.8);
@@ -227,6 +229,8 @@ void Maze::Draw()
             }
         glEnd();
     }
+
+
 }
 
 
@@ -290,7 +294,7 @@ void Maze::MovePerson(int to)
         if(world[personx][persony].neighbor[0]!=-1)
             --personx;
         break;
-    case 1://right =l 
+    case 1://right =l
         if(world[personx][persony].neighbor[1]!=-1)
             ++persony;
         break;
@@ -354,7 +358,7 @@ void Maze::SetAllCellUnVisited()
 void Maze::Reset()
 {
     delete m_pAlgorithm;
-    m_pAlgorithm=NULL;
+    m_pAlgorithm = NULL;
     personx=0;
     persony=0;
     finished=false;
@@ -401,4 +405,3 @@ bool Maze::TestNeighbor(int id1,int id2)
     }
     return false;
 }
-      

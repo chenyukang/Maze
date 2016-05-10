@@ -7,7 +7,7 @@ DFS_L::DFS_L(Maze* maze,int x,int y):AlgorithmBase(maze,x,y)
     Di[1][0]=1;Di[1][1]=0;
     Di[2][0]=0;Di[2][1]=-1;
     Di[3][0]=-1;Di[3][1]=0;
-	m_stack.push(Node(x,y));
+    m_stack.push(Node(x,y));
     dir_now=0;
     cout<<"DFS_L constructed"<<endl;
 }
@@ -37,19 +37,19 @@ bool DFS_L::search()
     while(1){
         nx=personx+Di[dir_now][0];
         ny=persony+Di[dir_now][1];
-        
+
         if(m_pMaze->IsValid(nx,ny)&&
            m_pMaze->IsValidNextPath(personx,persony,nx,ny))
         {
             personx=nx;
             persony=ny;
             m_path.push_back(m_pMaze->Getid(nx,ny));
-            
+
             return true;
         }
         dir_now=(dir_now+1)%4;
     }
-    
+
 }
 
 const vector<int>& DFS_L::GetPath()
@@ -61,5 +61,3 @@ void DFS_L::Draw()
 {
     return;
 }
-
-

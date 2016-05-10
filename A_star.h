@@ -4,6 +4,7 @@
 #include <queue>
 using namespace std;
 
+
 class A_star:public AlgorithmBase
 {
     class Node

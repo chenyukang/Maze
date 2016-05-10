@@ -12,7 +12,7 @@ Disjsets::Disjsets(int numElements):s(numElements)
 
 void Disjsets::unionSets(int root1,int root2)
 {
-    
+
     if( s[root2] < s[root1] )//root2 is deeper
         s[root1] = root2; //make root2 new root
     else
@@ -30,4 +30,3 @@ int Disjsets::find(int x) const
     else
         return find( s[x] );// find the x's root, return it
 }
-

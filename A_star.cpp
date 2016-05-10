@@ -2,15 +2,13 @@
 #include "Maze.h"
 #include <math.h>
 
-int abs ( int v ) 
-{
+int abs (int v)  {
  	if( v >= 0 )
 	return v;
 	else return -v;
 }
 
-A_star::A_star(Maze* maze,int x,int y):AlgorithmBase(maze,x,y)
-{
+A_star::A_star(Maze* maze,int x,int y):AlgorithmBase(maze,x,y) {
     Di[0][0]=-1;Di[0][1]=0;
     Di[1][0]=0;Di[1][1]=-1;
     Di[2][0]=0;Di[2][1]=1;
@@ -74,5 +72,5 @@ const vector<int>& A_star::GetPath()//return the path from source to target
         }
     }
     return m_path;
-    
 }
+
