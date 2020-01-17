@@ -2,7 +2,7 @@
 #include "Algorithm.h"
 #include "DFS_R.h"
 #include <GLUT/glut.h>
-#include "glui.h"
+#include <GL/glui.h>
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
